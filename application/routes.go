@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
-	"github.com/mayo829/services/handler"
+	// "github.com/mayo829/services/handler"
 )
 
 func loadRoutes() *chi.Mux {
