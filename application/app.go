@@ -8,6 +8,7 @@ import (
 
 type App struct {
   router http.Handler
+	db 
 }
 
 func New() *App {
