@@ -20,18 +20,20 @@ func loadRoutes() *chi.Mux {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	client, err := NewSupabaseClient()
+	client, err := handler.NewSupabaseClient()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	router.Route("/blogPost", loadBlogRoutes(client))
+	router.Route("/blogpost", func(r chi.Router) {
+		loadBlogRoutes(client, r)
+	})
 
 	return router
 }
 
 func loadBlogRoutes(cli *supabase.Client, router chi.Router) {
-	blogHandler := &handler.Blog{client: cli}
+	blogHandler := handler.NewBlogHandler(cli)
 
 	router.Post("/", blogHandler.Create)
 	router.Get("/", blogHandler.List)

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	// "context"
-	"log"
+	"context"
+	// "log"
 
 	"github.com/mayo829/services/application"
 )
@@ -11,7 +11,7 @@ import (
 func main() {
 	app := application.New()
 
-  err := app.Start()
+  err := app.Start(context.TODO())
   if err != nil {
     fmt.Println("failed to start app:", err)
   }
