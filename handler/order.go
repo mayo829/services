@@ -8,7 +8,7 @@ import (
 type Order struct{}
 
 func (o *Order) Create(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Create an order")
+	fmt.Println("Create an order", r.URL.Query().Get("cursor"))
 }
 
 func (o *Order) List(w http.ResponseWriter, r *http.Request) {
