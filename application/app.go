@@ -8,12 +8,13 @@ import (
 
 type App struct {
   router http.Handler
-	db 
+	client *Client
 }
 
-func New() *App {
+func New(client *Client) *App {
   app := &App{
-    router: loadRoutes(),
+    router: loadRoutes(client),
+		client: client,
   }
   
   return app

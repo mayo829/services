@@ -8,32 +8,36 @@ import (
 	"math/rand"
 	"strconv"
 	"time"
+	"os"
+	"log"
 
 	"github.com/mayo829/services/model"
 
 	"github.com/machinebox/graphql"
 	"github.com/supabase-community/supabase-go"
-	"github.com/lpernett/godotenv"
 )
 
-type Order struct{}
-
-func (o *Order) Create(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Create an order", r.URL.Query().Get("cursor"))
+type Blog struct{
+	client *Client
 }
 
-func (o *Order) List(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("List all orders")
+func (o *Blog) Create(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Create a blog")
 }
 
-func (o *Order) GetByID(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Get an order by ID")
+func (o *Blog) List(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("List all blogs")
+	data, count, err := o.client.From("countries").Select("*", "exact", false).Execute()
 }
 
-func (o *Order) UpdateByID(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Update an order by ID")
+func (o *Blog) GetByID(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Get a blog by ID")
 }
 
-func (o *Order) DeleteByID(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Delete an order by ID")
+func (o *Blog) UpdateByID(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Update a blog by ID")
+}
+
+func (o *Blog) DeleteByID(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Delete a blog by ID")
 }

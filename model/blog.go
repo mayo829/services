@@ -11,9 +11,3 @@ type Post struct {
 	CreatedAt   *time.Time `json:"created_at"`
 	UpdatedAt   *time.Time `json:"created_at"`
 }
-
-type LineItem struct {
-	ItemID   uuid.UUID `json:"item_id"`
-	Quantity uint      `json:"quantity"`
-	Price    uint      `json:"price"`
-}

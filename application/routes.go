@@ -9,7 +9,7 @@ import (
 	"github.com/mayo829/services/handler"
 )
 
-func loadRoutes() *chi.Mux {
+func loadRoutes(cli *Client) *chi.Mux {
 	router := chi.NewRouter()
 
 	router.Use(middleware.Logger)
@@ -18,17 +18,17 @@ func loadRoutes() *chi.Mux {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	router.Route("/orders", loadOrderRoutes)
+	router.Route("/blogPost", loadBlogRoutes(cli))
 
 	return router
 }
 
-func loadOrderRoutes(router chi.Router) {
-	orderHandler := &handler.Order{}
+func loadBlogRoutes(cli *Client, router chi.Router) {
+	blogHandler := &handler.Blog{client: cli}
 
-	router.Post("/", orderHandler.Create)
-	router.Get("/", orderHandler.List)
-	router.Get("/{id}", orderHandler.GetByID)
-	router.Put("/{id}", orderHandler.UpdateByID)
-  router.Delete("/{id}", orderHandler.DeleteByID)
+	router.Post("/", blogHandler.Create)
+	router.Get("/", blogHandler.List)
+	router.Get("/{id}", blogHandler.GetByID)
+	router.Put("/{id}", blogHandler.UpdateByID)
+  router.Delete("/{id}", blogHandler.DeleteByID)
 }
