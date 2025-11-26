@@ -3,22 +3,22 @@ package handler
 import (
 	"fmt"
 	"net/http"
-	"encoding/json"
-	"errors"
-	"math/rand"
-	"strconv"
-	"time"
-	"os"
-	"log"
+	// "encoding/json"
+	// "errors"
+	// "math/rand"
+	// "strconv"
+	// "time"
+	// "os"
+	// "log"
 
-	"github.com/mayo829/services/model"
+	// "github.com/mayo829/services/model"
 
-	"github.com/machinebox/graphql"
+	// "github.com/machinebox/graphql"
 	"github.com/supabase-community/supabase-go"
 )
 
 type Blog struct{
-	client *Client
+	client *supabase.Client
 }
 
 func (o *Blog) Create(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +28,7 @@ func (o *Blog) Create(w http.ResponseWriter, r *http.Request) {
 func (o *Blog) List(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("List all blogs")
 	data, count, err := o.client.From("countries").Select("*", "exact", false).Execute()
+	fmt.Println(data, count, err)
 }
 
 func (o *Blog) GetByID(w http.ResponseWriter, r *http.Request) {

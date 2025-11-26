@@ -8,13 +8,11 @@ import (
 
 type App struct {
   router http.Handler
-	client *Client
 }
 
-func New(client *Client) *App {
+func New() *App {
   app := &App{
-    router: loadRoutes(client),
-		client: client,
+    router: loadRoutes(),
   }
   
   return app

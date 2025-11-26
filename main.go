@@ -2,22 +2,16 @@ package main
 
 import (
 	"fmt"
-	"context"
+	// "context"
 	"log"
 
 	"github.com/mayo829/services/application"
-	"github.com/mayo829/services/handler"
 )
 
 func main() {
-	client, err := NewSupabaseClient()
-	if err != nil {
-		log.Fatal(err)
-	}
+	app := application.New()
 
-	app := application.New(client)
-
-  err := app.Start(context.TODO())
+  err := app.Start()
   if err != nil {
     fmt.Println("failed to start app:", err)
   }

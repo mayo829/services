@@ -8,7 +8,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func NewSupabaseClient() (*Client, error) {
+func NewSupabaseClient() (*supabase.Client, error) {
 	_ = godotenv.Load() // don't fatal—allow environment-only deployments
 
 	url := os.Getenv("SUPABASE_PROJECT_URL")

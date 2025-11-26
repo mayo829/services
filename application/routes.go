@@ -2,14 +2,16 @@ package application
 
 import (
 	"net/http"
-
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	"log"
 
 	"github.com/mayo829/services/handler"
+
+	"github.com/supabase-community/supabase-go"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
-func loadRoutes(cli *Client) *chi.Mux {
+func loadRoutes() *chi.Mux {
 	router := chi.NewRouter()
 
 	router.Use(middleware.Logger)
@@ -18,12 +20,17 @@ func loadRoutes(cli *Client) *chi.Mux {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	router.Route("/blogPost", loadBlogRoutes(cli))
+	client, err := NewSupabaseClient()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	router.Route("/blogPost", loadBlogRoutes(client))
 
 	return router
 }
 
-func loadBlogRoutes(cli *Client, router chi.Router) {
+func loadBlogRoutes(cli *supabase.Client, router chi.Router) {
 	blogHandler := &handler.Blog{client: cli}
 
 	router.Post("/", blogHandler.Create)
