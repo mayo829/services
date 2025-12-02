@@ -8,15 +8,16 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func NewSupabaseClient() (*supabase.Client, error) {
+func NewSupabaseClient() (*graphql.Client, error) {
 	_ = godotenv.Load() // don't fatal—allow environment-only deployments
 
-	url := os.Getenv("SUPABASE_PROJECT_URL")
-	key := os.Getenv("SUPABASE_API_KEY")
+	// url := os.Getenv("SUPABASE_PROJECT_URL")
+	project_id := os.Getenv("SUPABASE_PROJECT_ID")
+	// key := os.Getenv("SUPABASE_API_KEY")
 
-	if url == "" || key == "" {
+	if project_id == "" {
 		return nil, fmt.Errorf("missing Supabase credentials")
 	}
 
-	return supabase.NewClient(url, key, nil)
+	return graphql.NewClient("https://{project_id}.supabase.co/graphql/v1")
 }

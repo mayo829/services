@@ -32,7 +32,7 @@ func loadRoutes() *chi.Mux {
 	return router
 }
 
-func loadBlogRoutes(cli *supabase.Client, router chi.Router) {
+func loadBlogRoutes(cli *graphql.Client, router chi.Router) {
 	blogHandler := handler.NewBlogHandler(cli)
 
 	router.Post("/", blogHandler.Create)
